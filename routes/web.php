@@ -8,6 +8,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\AiEventController;
+use App\Http\Controllers\NoteController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -26,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/notite', [NoteController::class, 'index'])->name('notite.index');
+    Route::post('/notite', [NoteController::class, 'store'])->name('notite.store');
+    Route::delete('/notite/{id}', [NoteController::class, 'destroy'])->name('notite.destroy');
 });
 
 Route::get('/evenimente', [EventController::class, 'index'])->middleware('auth');

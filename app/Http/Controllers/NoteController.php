@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class NoteController extends Controller
 {
@@ -12,7 +14,11 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        // $notite = Note::where('user_id', auth()->id())->latest()->get();
+        $notite = Note::where('user_id', Auth::id())->latest()->get();
+        return Inertia::render('Notite/Index', [
+            'notite' => $notite,
+    ]);
     }
 
     /**
@@ -28,7 +34,18 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titlu' => 'required|string|max:255',
+            'continut' => 'nullable|string',
+        ]);
+
+        Note::create([
+            'user_id' => auth()->id(),
+            'titlu' => $request->titlu,
+            'continut' => $request->continut,
+        ]);
+
+        return redirect()->back()->with('success', 'Notița a fost adăugată.');
     }
 
     /**
@@ -60,6 +77,9 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $nota = Note::where('user_id', auth()->id())->findOrFail($id);
+        $nota->delete();
+
+        return redirect()->back()->with('success', 'Notița a fost ștearsă.');
     }
 }
