@@ -16,9 +16,13 @@ class NoteController extends Controller
     {
         // $notite = Note::where('user_id', auth()->id())->latest()->get();
         $notite = Note::where('user_id', Auth::id())->latest()->get();
+        
         return Inertia::render('Notite/Index', [
             'notite' => $notite,
-    ]);
+            'flash' => [
+                'success' => session('success'),
+            ],
+        ]);
     }
 
     /**
