@@ -1,8 +1,8 @@
 <template>
   <div class="max-w-2xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4">Notițele mele</h1>
+    <Tabs />
 
-    <!-- Form pentru adăugare -->
+    <h1 class="text-2xl font-bold mb-4">Notițele mele</h1>
     <form @submit.prevent="submitForm" class="space-y-4 mb-8">
       <div>
         <label class="block mb-1 font-medium">Titlu</label>
@@ -53,9 +53,12 @@
 import { useForm } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
+import Tabs from '@/Components/Tabs.vue'
+import { defineProps } from 'vue'
 
 defineProps({
   notite: Array,
+  notite: Array
 })
 
 const form = useForm({
