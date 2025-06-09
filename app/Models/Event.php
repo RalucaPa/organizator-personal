@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Event extends Model
 {
@@ -20,7 +21,7 @@ class Event extends Model
         'location',
         'description',
     ];
-
+    
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_events');

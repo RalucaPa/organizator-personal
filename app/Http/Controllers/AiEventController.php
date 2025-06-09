@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use App\Models\Event;
 use Carbon\Carbon;
 
@@ -31,6 +32,8 @@ class AiEventController extends Controller
             ],
             'temperature' => 0.3,
         ]);
+
+        Log::info('Răspuns OpenAI:', ['body' => $response->body()]);
 
         $content = $response->json();
         $raw = $content['choices'][0]['message']['content'] ?? null;
@@ -63,7 +66,7 @@ class AiEventController extends Controller
 
 
         // Save event in calendar
-        auth()->user()->savedEvents()->attach($event->id);
+        $request->user()->savedEvents()->attach($event->id);
 
         return response()->json(['success' => true, 'event' => $event]);
     }

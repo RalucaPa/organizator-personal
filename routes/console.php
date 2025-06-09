@@ -19,4 +19,5 @@ Schedule::call(function () {
             $event->user->notify(new UpcomingEventNotification($event));
         }
     }
-})->dailyAt('08:00');
+})->everyMinute(); // for testing purposes, change to daily later
+// })->dailyAt('08:00');
