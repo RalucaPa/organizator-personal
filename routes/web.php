@@ -9,6 +9,10 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\AiEventController;
 use App\Http\Controllers\NoteController;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\TestEmail;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -45,5 +49,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/ai/add-event', [AiEventController::class, 'addEvent'])->middleware('auth');
+
+Route::get('/test-email', function () {
+    try {
+        Mail::to('rralucapa@gmail.com')->send(new TestEmail());
+        Log::info('✅ Email trimis cu succes!');
+        return 'Email trimis!';
+    } catch (\Exception $e) {
+        Log::error('❌ Eroare la trimiterea emailului: ' . $e->getMessage());
+        return 'Eroare: ' . $e->getMessage();
+    }
+});
+
 
 require __DIR__.'/auth.php';

@@ -46,7 +46,7 @@ class UpcomingEventNotification extends Notification implements ShouldQueue
             ->line('Locație: ' . $this->event->location)
             ->line('Data și ora: ' . $this->event->start_time->format('d.m.Y H:i'))
             ->action('Vezi evenimentul', url('/calendar'))
-            ->line('Mult succes cu organizarea!')
+            ->line('Mult succes cu organizarea!');
     }
 
     /**
