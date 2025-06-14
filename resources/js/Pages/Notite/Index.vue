@@ -57,7 +57,6 @@ import Tabs from '@/Components/Tabs.vue'
 import { defineProps } from 'vue'
 
 defineProps({
-  notite: Array,
   notite: Array
 })
 

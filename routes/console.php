@@ -26,5 +26,4 @@ Schedule::call(function () {
             }
         }
     }
-})->everyMinute(); // change to daily after testing
-// })->dailyAt('08:00');
+})->dailyAt('08:00');

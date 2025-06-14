@@ -9,6 +9,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\AiEventController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\TestEmail;
@@ -61,5 +62,6 @@ Route::get('/test-email', function () {
     }
 });
 
+Route::get('/recomandari', [OfferController::class, 'index'])->name('offers.index');
 
 require __DIR__.'/auth.php';
