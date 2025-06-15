@@ -36,6 +36,15 @@
     >
       Oferte
     </Link>
+    <Link
+      href="/todo"
+      class="pb-2 text-gray-600 hover:text-blue-600 transition-all"
+      :class="{
+        'border-b-2 border-blue-500 text-blue-600 font-medium': $page.url === '/todo'
+      }"
+    >
+      Sarcini
+    </Link>
   </div>
 </template>
 

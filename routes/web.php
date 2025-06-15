@@ -13,6 +13,7 @@ use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\TestEmail;
+use App\Http\Controllers\TaskController;
 
 
 Route::get('/', function () {
@@ -63,5 +64,12 @@ Route::get('/test-email', function () {
 });
 
 Route::get('/recomandari', [OfferController::class, 'index'])->name('offers.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/todo', [TaskController::class, 'index'])->name('tasks.index');
+    Route::post('/todo', [TaskController::class, 'store'])->name('tasks.store');
+    Route::put('/todo/{task}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/todo/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+});
 
 require __DIR__.'/auth.php';

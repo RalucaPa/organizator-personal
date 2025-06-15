@@ -51,4 +51,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class, 'user_events');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(\App\Models\Task::class);
+    }
+    
+    public function notes()
+    {
+        return $this->hasMany(\App\Models\Note::class);
+    }
+
 }
