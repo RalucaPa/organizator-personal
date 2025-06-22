@@ -33,7 +33,7 @@ class AiEventController extends Controller
             'temperature' => 0.3,
         ]);
 
-        Log::info('Răspuns OpenAI:', ['body' => $response->body()]);
+        Log::info('Raspuns OpenAI:', ['body' => $response->body()]);
 
         $content = $response->json();
         $raw = $content['choices'][0]['message']['content'] ?? null;
